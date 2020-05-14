@@ -1,0 +1,16 @@
+<div *ngIf="userList && userList.length > 0; else noResults">
+  <ul class="user-list">
+    <li *ngFor="let item of userList; trackBy trackById">
+      <ng-template [ngIf]="item.type === 'PrivateUser'">
+        😎 {{item.name}} {{item.personId}}
+      </ng-template>
+      <ng-template  [ngIf]="item.type === 'Merchant'">
+        🏭 {{item.name}} {{item.vat}}
+      </ng-template>
+    </li>
+  </ul>
+  <button (click)="saveClicked.emit()">Save</button>
+</div>
+<ng-template #noResults>
+  Search has returned no results.
+</ng-template>

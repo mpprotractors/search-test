@@ -1,0 +1,11 @@
+<!-- This is just a placeholder. Feel free to do here whatever you would like to. -->
+<h1>Search for customers:</h1>
+<div>
+  <input type="text" [(ngModel)]="searchTerm">
+  <input type="submit" value="Search" (click)="executeSearch()">
+  <input type="submit" value="Clear" (click)="clearSearch()">
+</div>
+<app-user-list *ngIf="hasResults && !loading" [userList]="searchResults"
+                (saveClicked)="save()"></app-user-list>
+<app-loading *ngIf="loading"></app-loading>
+<app-error *ngIf="searchError" [errorMessage]="searchError"></app-error>

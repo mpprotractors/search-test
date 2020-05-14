@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SearchModule } from './search/search.module';
 import { ServicesModule } from './services/services.module';
 import { DataModule } from '@search-app/data';
+import { SearchModule } from './search/components/search/search.module';
 
 @NgModule({
   declarations: [
@@ -16,9 +16,9 @@ import { DataModule } from '@search-app/data';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    SearchModule,
     ServicesModule.forRoot(),
-    DataModule.forRoot()
+    DataModule.forRoot(),
+    SearchModule
   ],
   providers: [],
   bootstrap: [AppComponent]
