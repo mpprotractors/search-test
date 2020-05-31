@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders } from '@angular/compiler/src/core';
+
 import { MerchantService } from './merchant/merchant.service';
 import { UserService } from './user/user.service';
-
-
 
 @NgModule({
   declarations: [],

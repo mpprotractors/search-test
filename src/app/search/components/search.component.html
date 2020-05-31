@@ -1,36 +1,62 @@
-<!-- This is just a placeholder. Feel free to do here whatever you would like to. -->
-<h1>Search for customers:</h1>
-<div>
-  <input type="text">
-  <input type="submit" value="Search" (click)="executeSearch()">
-  <input type="submit" value="Clear" (click)="clearSearch()">
-</div>
-<div *ngIf="hasResults">
-  <ul>
-    <li>
-      😎 Arnie Wightweiß
-    </li>
-    <li>
-      🏭 OBM 879665465464
-    </li>
-    <li>
-      😎 Jackie Chen
-    </li>
-    <li>
-      😎 Dolphicco Lundgerinio
-    </li>
-    <li>
-      🏭 Fuhitsu 894844410
-    </li>
-    <li>
-      😎 Jason Statbeef
-    </li>
-    <li>
-      😎 Sylvester Horse
-    </li>
-    <li>
-      🏭 Qompaq 84666884118
-    </li>
-  </ul>
-  <button>Save</button>
+<div class="search">
+  <header class="search__header">
+    <h1 class="search__title">Search for customers:</h1>
+    <app-loader
+      *ngIf="form.disabled"
+      class="search__loader">
+    </app-loader>
+  </header>
+  <form
+    class="search__form"
+    [formGroup]="form"
+    (ngSubmit)="executeSearch()"
+  >
+    <div class="input">
+      <input
+        formControlName="search"
+        class="input__control"
+        type="text"
+        placeholder="Type something"
+      />
+      <span
+        class="input__error"
+        [class.input__error_visible]="error"
+      >
+      {{ error }}
+    </span>
+      <button
+        class="input__clear"
+        type="button"
+        [class.input__clear_visible]="form.value.search"
+        (click)="clearSearch()"
+      >+
+      </button>
+    </div>
+    <button
+      class="search__button"
+      type="submit"
+    >🔎
+    </button>
+    <button
+      class="search__button"
+      type="button"
+      *ngIf="searchResult$.getValue()?.length"
+      (click)="downloadCsv()"
+    >⬇️
+    </button>
+  </form>
+  <div
+    class="search__result"
+    *ngIf="searchResult$ | async as searchResult"
+  >
+    <app-search-item
+      class="search__item"
+      *ngFor="let item of searchResult; trackBy: itemTrackBy"
+      [data]="item"
+    ></app-search-item>
+
+    <div class="search__empty" *ngIf="!searchResult.length">
+      Sorry, nothing was found. Try a different query.
+    </div>
+  </div>
 </div>
